@@ -1,0 +1,390 @@
+$softRed: rgb(254, 120, 103);
+$yellow: rgb(250, 212, 0);
+$graphicDesignText: rgb(37, 86, 75);
+$photographyText: rgb(25, 83, 107);
+$cyanFooter: rgb(69, 140, 126);
+$veryDarkDesaturatedBlue: rgb(35, 48, 62);
+$veryDarkGrayishBlue: rgb(90, 99, 108);
+$darkGrayishBlue: rgb(129, 132, 152);
+$grayishBlue: rgb(167, 171, 174);
+$white: rgb(255, 255, 255);
+$barlow: 'Barlow', sans-serif;
+$fraunces: 'Fraunces', serif;
+$transition: 0.4s ease;
+/****************
+mixins
+****************/
+@mixin flex($direction, $justify, $align) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+}
+/****************
+basic styles
+****************/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-size: 18px;
+    font-family: $barlow;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: $white;
+    transition: $transition;
+  }
+button {
+    width: 150px;
+    height: 60px;
+    border: none;
+    transition: $transition;
+    cursor: pointer;
+    background: $white;
+    color: $veryDarkDesaturatedBlue;
+    font-weight: 900;
+    font-family: $fraunces;
+    border-radius: 30px;
+}
+button:hover {
+    background: rgb(111, 207, 255);
+    color: $white;
+}
+/****************
+Header
+****************/
+header {
+    background-image: url(images/desktop/image-header.jpg);
+    background-position: bottom 25% right 50%;
+    background-size: cover;
+    height: 100vh;
+    text-align: center;
+    nav {
+        padding: 5vh 5%;
+        @include flex(row, space-between, center);
+        ul {
+            @include flex(row, space-between, center);
+            width: 35%;
+            min-width: 400px;
+        }
+        .hamburger {
+            display: none;
+        }
+    }
+    h1 {
+        color: $white;
+        font-family: $fraunces;
+        font-weight: 900;
+        margin: 10vh 0;
+    }
+    .mob-nav-hidden {
+        display: none;
+        width: 90vw;
+        height: 70vh;
+        top: -10vh;
+        position: absolute;
+        right: 5%;
+        z-index: 55;
+        background: $white;
+        clip-path: polygon(0 34%, 94% 34%, 100% 30%, 100% 100%, 0 100%);
+        .ul-mob-nav-hidden {
+            position: absolute;
+            top: 45vh;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            li {
+                margin: 3vh 0;
+                a {
+                    color: $veryDarkGrayishBlue;
+                }
+            }
+            button {
+                background: $yellow;
+            }
+        }
+    }
+}
+/****************
+Main
+****************/
+main {
+    @include flex(row, start, start);
+    section {
+        width: 50%;
+        height: 66vh;
+        @include flex(column, center, center);
+        .main-text {
+            width: 60%;
+            height: 100%;
+            @include flex(column, center, start);
+            h2 {
+                color: $veryDarkDesaturatedBlue;
+                font-family: $fraunces;
+                font-weight: 900;
+                font-size: 42px;
+            }
+            p {
+                margin: 4vh 0;
+                color: $darkGrayishBlue;
+            }
+            h5 {
+                color: $veryDarkDesaturatedBlue;
+                font-family: $fraunces;
+                font-weight: 900;
+                cursor: pointer;
+            }
+            h5::after {
+                display: block;
+                content: '';
+                z-index: -1;
+                position: relative;
+                top: -8px;
+                left: -5%;
+                height: 10px;
+                width: 110%;
+                border-radius: 10px;
+                opacity: .25;
+                background: $yellow;
+            }
+            h5:hover::after {
+                opacity: 1;
+            }
+
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    section:nth-child(4) h5::after {
+        background: $softRed;
+    }
+    section:nth-child(5) {
+        background-image: url(images/desktop/image-graphic-design.jpg);
+        background-size: cover;
+        @include flex(column, flex-end, center);
+        background-position: center;
+        .main-bottom-text h3 {
+            color: $graphicDesignText;
+            font-family: $fraunces;
+            font-weight: 900;
+            font-size: 32px;
+        }
+        .main-bottom-text p {
+            padding: 5vh 0;
+            color: $graphicDesignText;
+        }
+    }
+    section:nth-child(6) {
+        background-image: url(images/desktop/image-photography.jpg);
+        background-size: cover;
+        background-position: center;
+        @include flex(column, flex-end, center);
+        .main-bottom-text h3 {
+            color: $photographyText;
+            font-family: $fraunces;
+            font-weight: 900;
+            font-size: 32px;
+        }
+        .main-bottom-text p {
+            padding: 5vh 0;
+            color: $photographyText;
+        }
+    }
+    .main-bottom-text {
+        width: 58%;
+        text-align: center;
+    }
+}
+/****************
+Clients
+****************/
+.clients {
+    @include flex(column, center, center);
+    padding: 100px 0;
+    h4 {
+        color: $darkGrayishBlue;
+        font-family: $fraunces;
+        font-weight: 900;
+        letter-spacing: 4px;
+        padding: 50px 0;
+    }
+    article {
+        @include flex(row, space-between, center);
+        width: 90%;
+        section {
+            width: 32%;
+            @include flex(column, center, center);
+            img {
+                border-radius: 50%;
+                height: 74px;
+                width: 74px;
+            }
+            p {
+                text-align: center;
+                color: $veryDarkGrayishBlue;
+                font-size: 21px;
+                padding: 7vh 0;
+            }
+            h2 {
+                font-weight: 900;
+                font-family: $fraunces;
+            }
+            .under-text {
+                font-size: 18px;
+                color: $grayishBlue;
+                padding: 2vh 0;
+            }
+        }
+    }
+}
+/****************
+Gallery
+****************/
+.gallery {
+    @include flex(row, start, start);
+
+    img {
+        width: 25%;
+        object-fit: cover;
+        display: block;
+    }
+}
+/****************
+Footer
+****************/
+footer {
+    @include flex(column,space-between , center );
+    background: $cyanFooter;
+    color: $graphicDesignText;
+    padding: 75px;
+    h3 {
+        color: $graphicDesignText;
+        font-family: $fraunces;
+        font-weight: 900;
+        font-size: 32px;
+    }
+    ul {
+        @include flex(row, space-between, center);
+        width: 35%;
+        min-width: 400px;
+        margin: 50px 0;
+        a {
+            color: $graphicDesignText;
+        }
+        a:hover {
+            color: $white;
+        }
+    }
+    .icons {
+        @include flex(row, space-between, center);
+        width: 14%;
+        min-width: 165px;
+        img {
+            cursor: pointer;
+            transition: $transition;
+        }
+        img:hover {
+            filter: brightness(1500%);
+        }
+    }   
+}
+/******************
+responsive for mob
+******************/
+@media (max-width:767px) {
+    header {
+        height: 80vh;
+        .ul-desktop {
+            display: none;
+        }
+        .hamburger {
+            display: block !important;
+        }
+        h1 {
+            margin: 3vh 0;
+        }
+        .mob-nav-hidden.active {
+            display: block;
+        }
+    }
+    main {
+        section {
+            width: 100%;
+            height: 48vh;
+            .main-text {
+                width: 80%;
+                text-align: center;
+                align-items: center;
+                h2 {
+                    font-size: 26px;
+                }
+                p {
+                    margin: 2vh 0;
+                    line-height: 22px;
+                }
+            }
+        }
+        section:nth-child(1) {
+            order: 2;
+        }
+        section:nth-child(2) {
+            order: 1;
+        }
+        section:nth-child(3) {
+            order: 3;
+        }
+        section:nth-child(4) {
+            order: 4;
+        }
+        section:nth-child(5) {
+            order: 5;
+            height: 90vh;
+        }
+        section:nth-child(6) {
+            order: 6;
+            height: 90vh;
+        }
+        .main-bottom-text {
+            width: 80%;
+            text-align: center;
+            align-items: center;
+            h2 {
+                font-size: 26px;
+            }
+            p {
+                margin: 2vh 0;
+                line-height: 22px;
+            }
+        }
+    }
+    .clients {
+        padding: 0px;
+        article {
+            width: 80%;
+            section {
+                width: 100%;
+                margin-bottom: 10vh;
+            }
+        }
+    }
+    .gallery img {
+        width: 50%;
+    }
+    footer {
+        padding: 10vh 0;
+        ul {
+            width: 80%;
+            min-width: auto;
+        }
+    }
+}
+
